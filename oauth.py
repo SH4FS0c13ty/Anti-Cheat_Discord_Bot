@@ -66,13 +66,11 @@ def me():
     discord = make_session(token=session.get('oauth2_token'))
     guilds = discord.get(API_BASE_URL + '/users/@me/guilds').json()
     identify = discord.get(API_BASE_URL + '/users/@me').json()
-    f=open("guilds.txt", "w+", encoding="utf-8")
+    userid = str(identify['id'])
+    f=open("server_lists\\" + userid + "_server_list.txt", "w+", encoding="utf-8")
     for entry in guilds:
         f.write(entry['id'] + '\n')
     f.close()
-    u=open("userid.txt", "w+", encoding="utf-8")
-    u.write(identify['id'])
-    u.close()
-    return redirect('[INVITE LINK]')
+    return redirect('<DISCORD_INVITE_LINK>')
 
-app.run(host="0.0.0.0", port=5000)
+app.run(host="0.0.0.0", port=5555)
