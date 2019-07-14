@@ -19,6 +19,8 @@ Install the requirements using `pip install -r requirements.txt` or `python -m p
 Example: `python main.py <OAUTH2_CLIENT_ID> <OAUTH2_CLIENT_SECRET> <CLIENT_ID>` <br />
 You can also use the "Anti-Cheat.bat" or "Anti-Cheat.sh" files to run the Bot without arguments.<br />
 Don't forget to modify the files above with your real IDs to make the bot work.<br />
+Don't forget to modify the "oauth.py" file according to your server to make it work.<br />
+<br />
 WARNING: When editing the blacklist, please add a blank line at the end of the file.<br />
 The bot verify the whole line with the \[CR\]\[LF\] invisible characters at the end of the line.<br />
 To see the characters, you can use Notepad++ > View > Show Symbol > Show End of Line.<br />
@@ -51,6 +53,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br />
 Authors:
 <br />
 SH4FS0c13ty (Twitter: @SH4FS0c13ty, Discord: Le Panda Roux#1562, Github: https://github.com/SH4FS0c13ty)<br />
-123321mario (http://123321mario.tk/)<br />
+123321mario ((http://123321mario.tk/ , Twitter: @123321mario, Discord: 123321mario#1337, GitHub: https://github.com/123321mario)<br />
 <br />
 Thanks to Stanislav Vishnevskiy for his Discord OAuth2 module (https://github.com/discordapp/discord-oauth2-example)
