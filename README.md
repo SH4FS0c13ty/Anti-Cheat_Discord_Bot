@@ -57,6 +57,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br />
 Authors:
 <br />
 SH4FS0c13ty (Twitter: @SH4FS0c13ty, Discord: Le Panda Roux#1562, Github: https://github.com/SH4FS0c13ty)<br />
-123321mario ((http://123321mario.tk/ , Twitter: @123321mario, Discord: 123321mario#1337, GitHub: https://github.com/123321mario)<br />
+123321mario (http://123321mario.tk/ , Twitter: @123321mario, Discord: 123321mario#1337, GitHub: https://github.com/123321mario)<br />
 <br />
 Thanks to Stanislav Vishnevskiy for his Discord OAuth2 module (https://github.com/discordapp/discord-oauth2-example)
