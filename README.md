@@ -25,6 +25,10 @@ WARNING: When editing the blacklist, please add a blank line at the end of the f
 The bot verify the whole line with the \[CR\]\[LF\] invisible characters at the end of the line.<br />
 To see the characters, you can use Notepad++ > View > Show Symbol > Show End of Line.<br />
 <br />
+Bot commands:
+ - ./verify
+ - ./kick <USER_NAME>
+ - ./recheck <USER_NAME>
  
 ## License
 
