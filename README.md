@@ -19,7 +19,7 @@ Install the requirements using `pip install -r requirements.txt` or `python -m p
 Example: `python main.py <OAUTH2_CLIENT_ID> <OAUTH2_CLIENT_SECRET> <CLIENT_ID>` <br />
 You can also use the "Anti-Cheat.bat" or "Anti-Cheat.sh" files to run the Bot without arguments.<br />
 Don't forget to modify the files above with your real IDs to make the bot work.<br />
-Don't forget to modify the "oauth.py" adn "check.py" file according to your server.<br />
+Don't forget to modify the "oauth.py" and "check.py" file according to your server.<br />
 <br />
 WARNING: When editing the blacklist, please add a blank line at the end of the file.<br />
 The bot verify the whole line with the \[CR\]\[LF\] invisible characters at the end of the line.<br />
