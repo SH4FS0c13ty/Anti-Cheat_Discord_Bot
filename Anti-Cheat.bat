@@ -2,4 +2,4 @@
 title Anti-Cheat Discord Bot
 cls
 echo Starting Anti-Cheat Discord Bot ...
-python main.py <OAUTH2_CLIENT_ID> <OAUTH2_CLIENT_SECRET> <CLIENT_ID>
+python main.py <OAUTH2_CLIENT_ID> <OAUTH2_CLIENT_SECRET> <BOT_TOKEN>
