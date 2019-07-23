@@ -20,7 +20,7 @@ async def on_member_join(member):
         await member.add_roles(role)
         print("Verified role applied to " + userid + ".")
         blacklisted = 0
-    else:
+    if blacklisted == 1:
         print("Cheater detected!\nKicking user " + userid + ".")
         await member.send("[<SERVER_NAME>] https://cdn.discordapp.com/attachments/451360093607297054/599226877277634561/IMG_20190511_111313.jpg \n[EN] You have been detected as a cheater, please contact an administrator and prove that you are not a cheater to access the server.\n[FR] Vous êtes soupçonné d'être un tricheur, veuillez contacter un administrateur et lui prouver que vous n'êtes pas un tricheur afin d'accéder au serveur.")
         write_cheater_id(userid)
@@ -45,7 +45,7 @@ async def verify(ctx):
         await ctx.author.add_roles(role)
         print("Verified role applied to " + userid + ".")
         blacklisted = 0
-    else:
+    if blacklisted == 1:
         print("Cheater detected!\nKicking user " + userid + ".")
         await ctx.send("Cheater detected!\nKicking user " + userid + ".")
         await ctx.author.send("[<SERVER_NAME>] https://cdn.discordapp.com/attachments/451360093607297054/599226877277634561/IMG_20190511_111313.jpg \n[EN] You have been detected as a cheater, please contact an administrator and prove that you are not a cheater to access the server.\n[FR] Vous êtes soupçonné d'être un tricheur, veuillez contacter un administrateur et lui prouver que vous n'êtes pas un tricheur afin d'accéder au serveur.")
@@ -53,12 +53,22 @@ async def verify(ctx):
         user = usr(userid)
         await ctx.guild.kick(user)
         blacklisted = 0
+    if blacklisted == 2:
+    print(userid + " did not authorize the bot to access his informations.")
+        await ctx.author.send("[EN] You must authorize the bot to access your informations before verifying yourself!\n[FR] Vous devez autoriser le bot à accéder à vos informations avant de vous vérifier !")
+        blacklisted = 0
 
 def write_cheater_id(id):
-    if id in open("cheaters_id.txt").read():
-        print("User " + id + " is already in the cheaters list.")
+    if os.path.isfile("cheaters_id.txt") == True:
+        if id in open("cheaters_id.txt").read():
+            print("User " + id + " is already in the cheaters list.")
+        else:
+            f=open("cheaters_id.txt", "a+", encoding="utf-8")
+            f.write(id + "\n")
+            f.close()
+            print("User " + id + " has been added to the cheaters list.")
     else:
-        f=open("cheaters_id.txt", "a+", encoding="utf-8")
+        f=open("cheaters_id.txt", "w+", encoding="utf-8")
         f.write(id + "\n")
         f.close()
         print("User " + id + " has been added to the cheaters list.")
@@ -95,7 +105,7 @@ def bcheck(userid):
         blacklist.close()
         guilds.close()
     else:
-        blacklisted = 1
+        blacklisted = 2
 
 class usr():
     def __init__(self, userid):

@@ -73,4 +73,4 @@ def me():
     f.close()
     return redirect('<DISCORD_INVITE_LINK>')
 
-app.run(host="0.0.0.0", port=5555)
+app.run(host="0.0.0.0", port=5000)
