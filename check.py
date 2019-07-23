@@ -54,7 +54,7 @@ async def verify(ctx):
         await ctx.guild.kick(user)
         blacklisted = 0
     if blacklisted == 2:
-    print(userid + " did not authorize the bot to access his informations.")
+        print(userid + " did not authorize the bot to access his informations.")
         await ctx.author.send("[EN] You must authorize the bot to access your informations before verifying yourself!\n[FR] Vous devez autoriser le bot à accéder à vos informations avant de vous vérifier !")
         blacklisted = 0
 
