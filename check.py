@@ -95,7 +95,7 @@ def bcheck(userid):
         blacklist.close()
         guilds.close()
     else:
-    blacklisted = 1
+        blacklisted = 1
 
 class usr():
     def __init__(self, userid):
