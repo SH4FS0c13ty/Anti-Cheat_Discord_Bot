@@ -84,15 +84,18 @@ def bcheck(userid):
     global blacklisted
     blacklisted = 0
     blacklist = open("blacklist.txt", "r")
-    guilds = open("server_lists\\" + userid + "_server_list.txt", "r", encoding="utf-8")
-    bline = blacklist.readlines()
-    gline = guilds.readlines()
-    for x in bline:
-        if x in gline:
-            print("Blacklisted server found!")
-            blacklisted = 1
-    blacklist.close()
-    guilds.close()
+    if os.path.isfile("server_lists\\" + userid + "_server_list.txt") == True:
+        guilds = open("server_lists\\" + userid + "_server_list.txt", "r", encoding="utf-8")
+        bline = blacklist.readlines()
+        gline = guilds.readlines()
+        for x in bline:
+            if x in gline:
+                print("Blacklisted server found!")
+                blacklisted = 1
+        blacklist.close()
+        guilds.close()
+    else:
+    blacklisted = 1
 
 class usr():
     def __init__(self, userid):
