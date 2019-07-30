@@ -1,32 +1,59 @@
 # Anti-Cheat Discord Bot
-A bot that kicks cheaters based on their server list.
+Anti-Cheat v1.3 (The Masterkiller) by SH4FS0c13ty<br />
+A Discord bot that kicks cheaters based on their server list and their Pokémon GO ID.<br />
 <br />
+Version française : https://github.com/SH4FS0c13ty/Anti-Cheat_Discord_Bot_FR
 <br />
 
 ## Requirements
 
- - Windows or Linux (recents versions that supports Python 3.7.4)
+The requirements below can be installed when executing "Anti-Cheat Requirements Installer.bat".<br />
+See the Installation section to know more.<br />
+ - Windows 10
  - [Python 3.7.4](https://www.python.org/downloads/release/python-374/)
+ - [Tesseract OCR](https://opensource.google.com/projects/tesseract)
 
 ## Installation
 
-Install Python 3.7.4 wherever you want but do NOT forget to add it to the PATH if you're on Windows. <br />
-Install the requirements using `pip install -r requirements.txt` or `python -m pip install -r requirements.txt`.
-<br /> <br />
+Run "Anti-Cheat Requirements Installer.bat" and select the installation that suits your system.
+<br />
+The installation will begin and no further action is needed.
+<br />
 
 ## Usage
 
-Example: `python main.py <OAUTH2_CLIENT_ID> <OAUTH2_CLIENT_SECRET> <BOT_TOKEN>` <br />
-You can also use the "Anti-Cheat.bat" or "Anti-Cheat.sh" files to run the Bot without arguments.<br />
-Don't forget to modify the files above with your real IDs to make the bot work.<br />
-Don't forget to modify the "oauth.py" and "check.py" file according to your server.<br />
+Run "Anti-Cheat.bat" and enter the command you want to use.<br />
+
+### Command set<br />
+Anti-Cheat process:<br />
+`start|stop|restart`<br />
+Anti-Cheat show lists and configuration:<br />
+`show config|blacklist|cheaters_lists`<br />
+Anti-Cheat reset lists and configuration:<br />
+`reset config|cheaters_lists|servers_lists`<br />
+Anti-Cheat set configuration:<br />
+`set CLIENT_ID|CLIENT_SECRET|TOKEN|HOST|PORT`<br />
 <br />
-WARNING: When editing the blacklist, please add a blank line at the end of the file.<br />
-The bot verify the whole line with the \[CR\]\[LF\] invisible characters at the end of the line.<br />
-To see the characters, you can use Notepad++ > View > Show Symbol > Show End of Line.<br />
+### Files used<br />
+Configuration file:<br />
+`scripts/config.json`<br />
+Servers blacklist:<br />
+`lists/blacklist.txt`<br />
+Cheaters Pokémon GO IDs list (see the template included):<br />
+`lists/cheaters.xlsx`<br />
+Cheaters Discord IDs list:<br />
+`lists/cheaters_id.txt`<br />
+Cheaters associated IDs (<POKEMON_GO_ID>:<DISCORD_ID>):<br />
+`lists/Associated_IDs.txt`<br />
+Servers lists of users:<br />
+`server_lists/<DISCORD_ID>.txt`<br />
 <br />
-Bot commands:
- - ./verify
+Don't forget to configure Anti-Cheat before using it!<br />
+To configure it, either modify the "config.json" file or use `set <PARAM>` commands.<br />
+You should also modify "blacklist.txt" and "cheaters.xlsx" files to make it works properly.<br />
+<br />
+### Bot commands
+ - ./verify <IMG_URL_OR_EMBEDDED_IMAGE>
  - ./kick <USER_NAME>
  - ./recheck <USER_NAME>
  
@@ -56,7 +83,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.<br />
 
 Authors:
 <br />
-SH4FS0c13ty (Twitter: @SH4FS0c13ty, Discord: Le Panda Roux#1562, Github: https://github.com/SH4FS0c13ty)<br />
-123321mario (http://123321mario.tk/ , Twitter: @123321mario, Discord: 123321mario#1337, GitHub: https://github.com/123321mario)<br />
+SH4FS0c13ty (Website: https://sh4fs0c13ty.tk/ , Twitter: @SH4FS0c13ty, Discord: SH4FS0c13ty#1562, Github: https://github.com/SH4FS0c13ty)<br />
+123321mario (Website: http://123321mario.tk/ , Twitter: @123321mario, Discord: 123321mario#1337, Github: https://github.com/123321mario)<br />
 <br />
 Thanks to Stanislav Vishnevskiy for his Discord OAuth2 module (https://github.com/discordapp/discord-oauth2-example)
