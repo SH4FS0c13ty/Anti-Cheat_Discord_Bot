@@ -76,11 +76,7 @@ goto end
 
 :basic_install
 echo Installing Python requirements ...
-IF EXIST "C:\Program Files (x86)\Python37-32" (
-	"C:\Program Files (x86)\Python37-32\python.exe" -m pip install -r "%dir%\setup\requirements.txt"
-) ELSE (
-	"C:\Program Files\Python37-32\python.exe" -m pip install -r "%dir%\setup\requirements.txt"
-)
+python -m pip install -r "%dir%\setup\requirements.txt"
 echo Downloading Tesseract 5 x86 ...
 "%dir%\setup\curl.exe" -# -k -o "%dir%\setup\tesseract_v5_x86.exe" https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w32-setup-v5.0.0-alpha.20190708.exe
 echo Installing Tesseract ...
