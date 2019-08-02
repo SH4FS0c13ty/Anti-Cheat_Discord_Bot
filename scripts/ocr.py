@@ -3,7 +3,10 @@ from PIL import Image
 
 def getid(file, userid):
     ocr_result = ocr_core(file)
-    pokeid = text_process(ocr_result, userid)
+    if ocr_result.find("&") != -1:
+        pokeid = text_process(ocr_result, userid)
+    else:
+        pokeid = "ERROR"
     os.remove(file)
     return pokeid
 

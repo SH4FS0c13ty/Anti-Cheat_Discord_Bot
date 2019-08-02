@@ -24,15 +24,25 @@ def show_config():
     HOST = res["HOST"]
     PORT = res["PORT"]
     REDIRECT_URL = res["REDIRECT_URL"]
+    OAUTH_WINDOW = res["OAUTH_WINDOW"]
+    CHECKER_WINDOW = res["CHECKER_WINDOW"]
 
-    print("Anti-Cheat current configuration")
     print("=========================================================================================")
-    print("CLIENT_ID:            " + CLIENT_ID)
-    print("CLIENT_SECRET:        " + CLIENT_SECRET)
-    print("TOKEN:                " + TOKEN)
-    print("HOST:                 " + HOST)
-    print("PORT:                 " + PORT)
-    print("REDIRECT_URL:          " + REDIRECT_URL)
+    print("                            Anti-Cheat current configuration                             ")
+    print("=========================================================================================")
+    print("                                   Functional settings                                   ")
+    print("=========================================================================================")
+    print(" CLIENT_ID:            " + CLIENT_ID)
+    print(" CLIENT_SECRET:        " + CLIENT_SECRET)
+    print(" TOKEN:                " + TOKEN)
+    print(" HOST:                 " + HOST)
+    print(" PORT:                 " + PORT)
+    print(" REDIRECT_URL:         " + REDIRECT_URL)
+    print("=========================================================================================")
+    print("                                     Windows settings                                    ")
+    print("=========================================================================================")
+    print(" OAUTH_WINDOW:         " + OAUTH_WINDOW)
+    print(" CHECKER_WINDOW:       " + CHECKER_WINDOW)
     print("=========================================================================================")
     
 def show_cheaters_pid():
@@ -49,15 +59,17 @@ def reset_json():
           "TOKEN" : "<TOKEN>",
           "HOST" : "<HOST>",
           "PORT" : "<PORT>",
-          "REDIRECT_URL" : "<REDIRECT_URL>"
+          "REDIRECT_URL" : "<REDIRECT_URL>",
+          "OAUTH_WINDOW" : "SW_MINIMIZE",
+          "CHECKER_WINDOW": "SW_MINIMIZE"
           }
     try:
         json_file = open("scripts\\config.json", "w")
         json.dump(res, json_file, indent=4)
         json_file.close()
-        print("[INFO] Configuration file has been reset.")
+        print("Configuration file has been reset.")
     except:
-        print("[WARN] An error occured while resetting the configuration file.")
+        print("An error occured while resetting the configuration file.")
 
 def set(var):
     val = input("Value for " + var + ": ")

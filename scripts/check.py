@@ -1,7 +1,7 @@
 import discord, sys, os, requests, json, ctypes
 import ocr, tools, getcolor
 from discord.ext import commands
-from discord.ext.commands import has_permissions, CheckFailure
+from discord.ext.commands import has_permissions
 from discord.utils import get
 
 ctypes.windll.kernel32.SetConsoleTitleW("Anti-Cheat Checker module")
@@ -29,7 +29,7 @@ async def on_member_join(member):
         else:
             print("[INFO] " + username + " is not in the cheaters list.")
     except:
-        print("[WARN] Cheaters list is missing. Cannot verify " + username)
+        print("[WARN] Cheaters list is missing. Cannot verify " + username + ".")
 
 
 @bot.command(pass_context=True)
@@ -44,7 +44,7 @@ async def verify(ctx, url=None):
         print("[WARN] " + username + " tried to use ./verify but is already verified.")
         await ctx.message.delete()
     else:
-        if url == None:
+        if url is None:
             try:
                 url = str(ctx.message.attachments[0].url)
             except:
@@ -54,10 +54,15 @@ async def verify(ctx, url=None):
                 return 0
         print("[INFO] " + username + " is being verified.")
         get_img(url, userid)
+        if pokeid == "ERROR":
+            print("[WARN] Wrong Pokémon GO page submitted. Cannot verify " + username + ".")
+            await ctx.author.send("[Pokémon GO Marseille]\n:flag_us: The image you submitted for verification is wrong!\n:flag_fr: L'image que vous avez soumis pour la vérification est incorrecte !")
+            await ctx.channel.purge(limit=None, check=lambda msg: not msg.pinned)
+            return 0
         bcheck(userid)
         if blacklisted == 0:
             print("[INFO] " + "New verified user: " + username + ".")
-            await ctx.author.send("[Pokémon GO Marseille]\n[EN] Welcome to the server Pokémon GO Marseille!\n[FR] Bienvenue dans le serveur Pokémon GO Marseille !")
+            await ctx.author.send("[Pokémon GO Marseille]\n:flag_us: Welcome to the server Pokémon GO Marseille!\n:flag_fr: Bienvenue dans le serveur Pokémon GO Marseille !")
             role = get(ctx.guild.roles, name="Verified")
             await ctx.author.add_roles(role)
             print("[INFO] " + "Verified role applied to " + username + ".")
@@ -70,14 +75,14 @@ async def verify(ctx, url=None):
             blacklisted = 0
         if blacklisted == 1:
             print("[WARN] " + "Cheater detected!\n[INFO] Kicking " + username + ".")
-            await ctx.author.send("[Pokémon GO Marseille]\n https://cdn.discordapp.com/attachments/451360093607297054/599226877277634561/IMG_20190511_111313.jpg \n[EN] You have been detected as a cheater, please contact an administrator and prove that you are not a cheater to access the server.\n[FR] Vous êtes soupçonné d'être un tricheur, veuillez contacter un administrateur et lui prouver que vous n'êtes pas un tricheur afin d'accéder au serveur.")
+            await ctx.author.send("[Pokémon GO Marseille]\n https://cdn.discordapp.com/attachments/451360093607297054/599226877277634561/IMG_20190511_111313.jpg \n:flag_us: You have been detected as a cheater, please contact an administrator and prove that you are not a cheater to access the server.\n:flag_fr: Vous êtes soupçonné d'être un tricheur, veuillez contacter un administrateur et lui prouver que vous n'êtes pas un tricheur afin d'accéder au serveur.")
             write_cheater_id(userid)
             user = usr(userid)
             await ctx.guild.kick(user)
             blacklisted = 0
         if blacklisted == 2:
             print("[WARN] " + username + " did not authorize the bot to access his informations.")
-            await ctx.author.send("[EN] You must authorize the bot to access your informations before verifying yourself!\n[FR] Vous devez autoriser le bot à accéder à vos informations avant de vous vérifier !")
+            await ctx.author.send(":flag_us: You must authorize the bot to access your informations before verifying yourself!\n:flag_fr: Vous devez autoriser le bot à accéder à vos informations avant de vous vérifier !")
             blacklisted = 0
         await ctx.channel.purge(limit=None, check=lambda msg: not msg.pinned)
         print("[INFO] Channel cleared.")
@@ -109,7 +114,6 @@ def write_cheater_id(id):
 
 @bot.event
 async def on_ready():
-    bot_name = bot.user.name
     bot_id = str(bot.user.id)
     print("Logged in successfully.")
     print("Name: " + bot.user.name)
@@ -121,12 +125,8 @@ async def on_ready():
 async def kick(ctx, user: discord.Member):
     username = str(user.name)
     print("[INFO] " + "User kicked: " + username + ".")
-    await ctx.author.send("[EN] You have been kicked from the server. Please verify yourself again to access the server.\n[FR] Vous avez été kické du serveur. Veuillez vous soumettre à une nouvelle vérification afin d'accéder au serveur.")
+    await user.send(":flag_us: You have been kicked from the server. Please verify yourself again to access the server.\n:flag_fr: Vous avez été kické du serveur. Veuillez vous soumettre à une nouvelle vérification afin d'accéder au serveur.")
     await ctx.guild.kick(user)
-
-@kick.error
-async def kick_error(error, ctx):
-    print("[WARN] Someone tried to use ./kick command without administrator permissions.\n[WARN] Please check the Discord channel to know more.")
 
 def bcheck(userid):
     global blacklisted
@@ -158,7 +158,7 @@ def json_check(pokid, usrid):
     print("[INFO] " + "Checking Pokémon GO cheaters list ...")
     if os.path.isfile("lists\\cheaters.json") == False:
         tools.excel2json()
-    with open("lists\cheaters.json") as json_file:
+    with open("lists\\cheaters.json") as json_file:
         data = json.load(json_file)
         for p in data:
             if pokeid == p["Pseudo*"]:
@@ -192,21 +192,45 @@ async def recheck(ctx, user: discord.Member):
     role = get(ctx.guild.roles, name="Verified")
     if role in user.roles:
         await user.remove_roles(role)
-    role = get(ctx.guild.roles, name="Instinct")
+    role = get(ctx.guild.roles, name="instinct")
     if role in user.roles:
         await user.remove_roles(role)
-    role = get(ctx.guild.roles, name="Valor")
+    role = get(ctx.guild.roles, name="valor")
     if role in user.roles:
         await user.remove_roles(role)
-    role = get(ctx.guild.roles, name="Mystic")
+    role = get(ctx.guild.roles, name="mystic")
     if role in user.roles:
         await user.remove_roles(role)
     os.remove("servers_lists\\" + userid + "_servers_list.txt")
-    await user.send("[Pokémon GO Marseille]\n[EN] You have been asked for a new verification, please follow the autorisation link and use ./verify to verify yourself.\n[FR] Une nouvelle vérification de votre part est requise, veuillez suivre le lien d'autorisation et utilisez ./verify pour vous vérifier.")
+    await user.send("[Pokémon GO Marseille]\n:flag_us: You have been asked for a new verification, please follow the autorisation link and use ./verify to verify yourself.\n:flag_fr: Une nouvelle vérification de votre part est requise, veuillez suivre le lien d'autorisation et utilisez ./verify pour vous vérifier.")
 
-@recheck.error
-async def kick_error(error, ctx):
-    print("[WARN] Someone tried to use ./recheck command without administrator permissions.\n[WARN] Please check the Discord channel to know more.")
-
+@bot.command(pass_context=True)
+@has_permissions(administrator=True)
+async def recheck_all(ctx):
+    print("[INFO] Everyone has been asked for a new verification.")
+    await ctx.send("@everyone\n[Pokémon GO Marseille]\n:flag_us: Everyone must be verified again, please follow the autorisation link and use ./verify to verify yourself.\n:flag_fr: Tout le monde doit être vérifié une nouvelle fois, veuillez suivre le lien d'autorisation et utilisez ./verify pour vous vérifier.")
+    for member in ctx.message.guild.members:
+        userid = member.id
+        flag = False
+        role = get(ctx.guild.roles, name="Admin")
+        if role in member.roles:
+            flag = True
+        if userid == bot.user.id:
+            flag=True
+        if flag != True:
+            role = get(ctx.guild.roles, name="Verified")
+            if role in member.roles:
+                await member.remove_roles(role)
+            role = get(ctx.guild.roles, name="instinct")
+            if role in member.roles:
+                await member.remove_roles(role)
+            role = get(ctx.guild.roles, name="valor")
+            if role in member.roles:
+                await member.remove_roles(role)
+            role = get(ctx.guild.roles, name="mystic")
+            if role in member.roles:
+                await member.remove_roles(role)
+            if os.path.isfile("servers_lists\\" + str(userid) + "_servers_list.txt") == True:
+                os.remove("servers_lists\\" + str(userid) + "_servers_list.txt")
 
 bot.run(arg)

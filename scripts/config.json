@@ -4,5 +4,7 @@
     "TOKEN": "<TOKEN>",
     "HOST": "<HOST>",
     "PORT": "<PORT>",
-    "REDIRECT_URL": "<REDIRECT_URL>"
+    "REDIRECT_URL": "<REDIRECT_URL>",
+    "OAUTH_WINDOW": "SW_MINIMIZE",
+    "CHECKER_WINDOW": "SW_MINIMIZE"
 }

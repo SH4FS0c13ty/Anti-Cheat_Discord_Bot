@@ -16,10 +16,10 @@ def main_color(image):
 
     if r >= g and r >= b:
         if g >= b:
-            main_color = "Instinct"
+            main_color = "instinct"
         else:
-            main_color = "Valor"
+            main_color = "valor"
     else:
-        main_color = "Mystic"
+        main_color = "mystic"
     
     return main_color

@@ -10,7 +10,7 @@ echo ██╔══██║██║╚██╗██║   ██║   ██
 echo ██║  ██║██║ ╚████║   ██║   ██║      ╚██████╗██║  ██║███████╗██║  ██║   ██║   
 echo ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝       ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   
 echo.
-echo Anti-Cheat v1.3 (The Masterkiller) by SH4FS0c13ty
+echo Anti-Cheat v1.3.1 (The Masterkiller) by SH4FS0c13ty
 echo A Discord bot that kicks cheaters based on their server list and their Pokémon GO ID.
 echo.
 echo Type "help" to show the help menu.
@@ -42,6 +42,8 @@ if /i "%start%" EQU "set TOKEN" goto set_token
 if /i "%start%" EQU "set HOST" goto set_host
 if /i "%start%" EQU "set PORT" goto set_port
 if /i "%start%" EQU "set REDIRECT_URL" goto set_redirect_url
+if /i "%start%" EQU "set OAUTH_WINDOW" goto set_oauth_win
+if /i "%start%" EQU "set CHECKER_WINDOW" goto set_checker_win
 
 echo Unknown command.
 
@@ -73,6 +75,8 @@ echo set TOKEN                         Set the BOT_TOKEN value in configuration 
 echo set HOST                          Set the IP address of the webserver host
 echo set PORT                          Set the port number in configuration file
 echo set REDIRECT_URL                  Set the URL for redirection in configuration file
+echo set OAUTH_WINDOW                  Set the Anti-Cheat OAuth2 module window state in configuration file
+echo set CHECKER_WINDOW                Set the Anti-Cheat Checker module window state in configuration file
 goto prompt
 
 :about
@@ -85,7 +89,7 @@ echo ██╔══██║██║╚██╗██║   ██║   ██
 echo ██║  ██║██║ ╚████║   ██║   ██║      ╚██████╗██║  ██║███████╗██║  ██║   ██║   
 echo ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝       ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   
 echo.
-echo Anti-Cheat v1.3 (The Masterkiller) by SH4FS0c13ty
+echo Anti-Cheat v1.3.1 (The Masterkiller) by SH4FS0c13ty
 echo A Discord bot that kicks cheaters based on their server list and their Pokémon GO ID.
 echo.
 echo This project was born on a demand of 123321mario (http://123321mario.tk/) who
@@ -211,7 +215,6 @@ goto reset_cheaters
 
 :reset_cheaters_did
 del /Q lists\\cheaters_ids
-echo.
 echo Cheaters Discord IDs list deleted.
 echo.
 pause
@@ -219,7 +222,6 @@ goto reset_cheaters
 
 :reset_cheaters_pid
 del /Q lists\\cheaters.json
-echo.
 echo Cheaters Pokémon GO IDs list deleted.
 echo.
 pause
@@ -227,7 +229,6 @@ goto reset_cheaters
 
 :reset_cheaters_aid
 del /Q lists\\Associated_IDs.txt
-echo.
 echo Cheaters associated IDs list deleted.
 echo.
 pause
@@ -271,4 +272,18 @@ goto prompt
 
 :set_redirect_url
 scripts\\tools.py set REDIRECT_URL
+goto prompt
+
+:set_oauth_win
+echo OAUTH_WINDOW value must be SW_HIDE, SW_MINIMIZE, SW_MAXIMIZE or SW_SHOW.
+echo Otherwise, it will use the default value SW_MINIMIZE.
+echo.
+scripts\\tools.py set OAUTH_WINDOW
+goto prompt
+
+:set_checker_win
+echo CHECKER_WINDOW value must be SW_HIDE, SW_MINIMIZE, SW_MAXIMIZE or SW_SHOW.
+echo Otherwise, it will use the default value SW_MINIMIZE.
+echo.
+scripts\\tools.py set CHECKER_WINDOW
 goto prompt
