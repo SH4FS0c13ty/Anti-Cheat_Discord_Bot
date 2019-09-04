@@ -43,7 +43,7 @@ Anti-Cheat set configuration:<br />
 Log file:<br />
 `logs/Anti-Cheat.log`<br />
 Traceback file:<br />
-`logs/Anti-Cheat_traceback.log`
+`logs/Anti-Cheat_traceback.log`<br />
 Configuration file:<br />
 `scripts/config.json`<br />
 Servers blacklist:<br />
