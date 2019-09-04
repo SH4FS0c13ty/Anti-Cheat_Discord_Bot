@@ -4,3 +4,5 @@ discord>=1.0.1
 pytesseract
 Pillow
 excel2json-3
+colorama
+waitress

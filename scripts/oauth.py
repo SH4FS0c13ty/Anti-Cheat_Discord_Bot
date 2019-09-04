@@ -1,6 +1,7 @@
 import os, sys, ctypes
 from flask import Flask, g, session, redirect, request, url_for, jsonify
 from requests_oauthlib import OAuth2Session
+from waitress import serve
 
 ctypes.windll.kernel32.SetConsoleTitleW("Anti-Cheat OAuth2 module")
 
@@ -77,4 +78,4 @@ def me():
     f.close()
     return redirect(REDIRECT_URL)
 
-app.run(host="0.0.0.0", port=PORT)
+serve(app, host="0.0.0.0", port=PORT)

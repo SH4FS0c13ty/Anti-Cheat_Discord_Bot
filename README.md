@@ -1,5 +1,5 @@
 # Anti-Cheat Discord Bot
-Anti-Cheat v1.3.1 (The Masterkiller) by SH4FS0c13ty<br />
+Anti-Cheat v1.4.0 (The Assassin) by SH4FS0c13ty<br />
 A Discord bot that kicks cheaters based on their server list and their Pokémon GO ID.<br />
 <br />
 Version française : https://github.com/SH4FS0c13ty/Anti-Cheat_Discord_Bot_FR
@@ -19,6 +19,11 @@ Run "Anti-Cheat Requirements Installer.bat" and select the installation that sui
 <br />
 The installation will begin and no further action is needed.
 <br />
+<br />
+The main Anti-Cheat console will check for updates at every start.
+<br />
+If an update if found, you will be alerted on the main console.
+<br />
 
 ## Usage
 
@@ -26,7 +31,7 @@ Run "Anti-Cheat.bat" and enter the command you want to use.<br />
 
 ### Command set<br />
 Anti-Cheat process:<br />
-`start|stop|restart`<br />
+`start|stop|restart|autostart`<br />
 Anti-Cheat show lists and configuration:<br />
 `show config|blacklist|cheaters_lists`<br />
 Anti-Cheat reset lists and configuration:<br />
@@ -35,6 +40,10 @@ Anti-Cheat set configuration:<br />
 `set CLIENT_ID|CLIENT_SECRET|TOKEN|HOST|PORT|OAUTH_WINDOW|CHECKER_WINDOW`<br />
 <br />
 ### Files used<br />
+Log file:<br />
+`logs/Anti-Cheat.log`<br />
+Traceback file:<br />
+`logs/Anti-Cheat_traceback.log`
 Configuration file:<br />
 `scripts/config.json`<br />
 Servers blacklist:<br />

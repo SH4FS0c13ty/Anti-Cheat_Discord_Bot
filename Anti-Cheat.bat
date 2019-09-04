@@ -10,10 +10,25 @@ echo ██╔══██║██║╚██╗██║   ██║   ██
 echo ██║  ██║██║ ╚████║   ██║   ██║      ╚██████╗██║  ██║███████╗██║  ██║   ██║   
 echo ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝       ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   
 echo.
-echo Anti-Cheat v1.3.1 (The Masterkiller) by SH4FS0c13ty
+echo Anti-Cheat v1.4.0 (The Assassin) by SH4FS0c13ty
 echo A Discord bot that kicks cheaters based on their server list and their Pokémon GO ID.
 echo.
 echo Type "help" to show the help menu.
+echo.
+if exist scripts\\oauth_pid.txt (
+	for /F %%q in (scripts\\oauth_pid.txt) do (
+		taskkill /F /PID:%%q 2>NUL >NUL
+	)
+)
+if exist scripts\\check_pid.txt (
+	for /F %%p in (scripts\\check_pid.txt) do (
+		taskkill /F /PID:%%p 2>NUL >NUL
+	)
+)
+python scripts\\updater.py check
+echo.
+python scripts\\tools.py autostart start
+
 
 :prompt
 echo.
@@ -23,10 +38,13 @@ if /i "%start%" EQU "exit" exit
 if /i "%start%" EQU "help" goto help
 if /i "%start%" EQU "about" goto about
 if /i "%start%" EQU "license" goto license
+if /i "%start%" EQU "update" goto update
+if /i "%start%" EQU "clear" cls && goto prompt
 
 if /i "%start%" EQU "start" goto start
 if /i "%start%" EQU "stop" goto stop
 if /i "%start%" EQU "restart" goto restart
+if /i "%start%" EQU "autostart" goto autostart
 
 if /i "%start%" EQU "show config" goto show_conf
 if /i "%start%" EQU "show blacklist" goto show_bl
@@ -56,10 +74,13 @@ echo exit                              Exit the Anti-Cheat command prompt
 echo help                              Show this menu
 echo about                             Show the about section
 echo license                           Show the license
+echo update                            Update Anti-Cheat
+echo clear                             Clear the console
 echo.
 echo start                             Start Anti-Cheat (Bot and webserver)
 echo stop                              Stop Anti-Cheat (Bot and webserver)
 echo restart                           Restart Anti-Cheat (Bot and webserver)
+echo autostart                         Set autostart value in config.json file
 echo.
 echo show config                       Show the configuration
 echo show blacklist                    Show the current blacklist
@@ -89,7 +110,7 @@ echo ██╔══██║██║╚██╗██║   ██║   ██
 echo ██║  ██║██║ ╚████║   ██║   ██║      ╚██████╗██║  ██║███████╗██║  ██║   ██║   
 echo ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝   ╚═╝       ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   
 echo.
-echo Anti-Cheat v1.3.1 (The Masterkiller) by SH4FS0c13ty
+echo Anti-Cheat v1.4.0 (The Assassin) by SH4FS0c13ty
 echo A Discord bot that kicks cheaters based on their server list and their Pokémon GO ID.
 echo.
 echo This project was born on a demand of 123321mario (http://123321mario.tk/) who
@@ -97,7 +118,11 @@ echo wanted to prevent cheaters from entering legit Pokémon GO servers.
 echo As I like to get my hands dirty, I started this project, improved it until the
 echo last build which is at https://github.com/SH4FS0c13ty/Anti-Cheat_Discord_Bot
 echo.
-scripts\tools.py contact
+python scripts\tools.py contact
+goto prompt
+
+:update
+python scripts\\updater.py update
 goto prompt
 
 :license
@@ -131,6 +156,10 @@ for /F %%p in (scripts\\check_pid.txt) do (
 )
 echo.
 python scripts\\main.py scripts\\config.json
+goto prompt
+
+:autostart
+python scripts\\tools.py autostart config
 goto prompt
 
 :show_conf
@@ -241,49 +270,49 @@ goto prompt
 
 :reset_conf
 echo Resetting configuration file ...
-scripts\\tools.py reset_json
+python scripts\\tools.py reset_json
 goto prompt
 
 :set_client_id
 echo CLIENT_ID value must be only a number.
 echo.
-scripts\\tools.py set CLIENT_ID
+python scripts\\tools.py set CLIENT_ID
 goto prompt
 
 :set_client_secret
-scripts\\tools.py set CLIENT_SECRET
+python scripts\\tools.py set CLIENT_SECRET
 goto prompt
 
 :set_token
-scripts\\tools.py set TOKEN
+python scripts\\tools.py set TOKEN
 goto prompt
 
 :set_host
 echo HOST value must be somthing like XXX.XXX.XXX.XXX (the number of Xs doesn't matter).
 echo.
-scripts\\tools.py set HOST
+python scripts\\tools.py set HOST
 goto prompt
 
 :set_port
 echo PORT value must be only a number.
 echo.
-scripts\\tools.py set PORT
+python scripts\\tools.py set PORT
 goto prompt
 
 :set_redirect_url
-scripts\\tools.py set REDIRECT_URL
+python scripts\\tools.py set REDIRECT_URL
 goto prompt
 
 :set_oauth_win
 echo OAUTH_WINDOW value must be SW_HIDE, SW_MINIMIZE, SW_MAXIMIZE or SW_SHOW.
 echo Otherwise, it will use the default value SW_MINIMIZE.
 echo.
-scripts\\tools.py set OAUTH_WINDOW
+python scripts\\tools.py set OAUTH_WINDOW
 goto prompt
 
 :set_checker_win
 echo CHECKER_WINDOW value must be SW_HIDE, SW_MINIMIZE, SW_MAXIMIZE or SW_SHOW.
 echo Otherwise, it will use the default value SW_MINIMIZE.
 echo.
-scripts\\tools.py set CHECKER_WINDOW
+python scripts\\tools.py set CHECKER_WINDOW
 goto prompt
